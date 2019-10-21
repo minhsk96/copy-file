@@ -1,0 +1,3 @@
+link download: https://codeload.github.com/minhsk96/nt/zip/master
+link path local: /home/minhsk/Documents/C_programming/nt
+status: success

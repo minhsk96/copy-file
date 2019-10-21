@@ -1,0 +1,38 @@
+Bài 1:
+Mục tiêu:
+  - Làm quen với xử lý tham số truyền vào khi thực hiện chương trình
+  - Luyện tập thao tác đọc ghi file và một số phương thức hay sử dụng trên Linux
+
+Yêu cầu chương trình:
+ 
+ **) Đầu vào:
+  - Link tải được truyền cho chương trình theo 2 cách: tham số truyền vào khi chạy chương trình hoặc đọc từ 1 file "link.txt" trong cùng thư mục của chương trình
+
+ **) Đầu ra:
+  - Tải được file về máy
+  - Sau khi tải xong ghi vào 1 file "result.txt" trong cùng thư mục của chương trình các thông tin sau:
+	+ Dòng 1: Link tải theo cú pháp "Link: https://xxxx...."
+	+ Dòng 2: Trạng thái tải file "Status: Success or Fail"
+	+ Dòng 3: Vị trí file tải về trên máy "Location: /home/dunglx/..." 
+
+ **) Chạy chương trình:
+  - $ ./main.o 
+	+ Với các option:
+      -a link-truc-tiep  : string chứa link tải trực tiếp. Ví dụ: ./main.o -a https://link1.com/xxx https://link2.com/yyy .... 
+      -f links.txt       : links.txt gồm nhiều dòng, mỗi dòng là 1 string chứa 1 link tải file 
+
+
+Bài 2: Giao tiếp với webserver
+
+Giới thiệu:
+  - Mọi client đều có thể giao tiếp trực tiếp với webserver để có thể lấy được các thông tin mà phía server quy định trả về tùy theo cấu trúc client request lên.
+  - Vẫn sử dụng thư viện curl.h, request lên server (thông tin gửi lên có chứa thông tin phiên bản hiện tại của thiết bị) rồi get data trả về (trong đó chứa thông tin có phiên bản phần mềm nào mới hơn trên server hay không), sau đó phân tích thông tin trả về để lấy được các link tải các file chứa phần mềm mới hơn này.
+
+Mục tiêu:
+  - Làm quen với việc xử lý file định dạng XML trong C
+  - Làm quen với việc giao tiếp với webserver trong code C linux
+
+Yêu cầu:
+  - Sử dụng mẫu file thông tin request lên server để POST request lên server thông qua hàm trong curl.h
+  - Get thông tin trả về từ server 
+  - Parse thông tin trả về để tìm trường links tải url:"..."
