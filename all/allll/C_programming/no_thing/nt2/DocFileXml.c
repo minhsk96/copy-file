@@ -1,4 +1,6 @@
 #include<stdio.h>
+#include<stdbool.h>
+#include <string.h>
 #define FileName return_file.xml
 
 // khai báo hai con trỏ key1 và key2 chứa thông tin của hai trường ta cần lấy trong file xml.
@@ -16,12 +18,12 @@ int DoDaiChuoi(char *s){
 }
 
 // hàm kiểm tra chuỗi c1 có nằm trong chuỗi c2 không, nếu có thì trả về 1, nếu không trả về 0.
-int KiemTra(char *key , char *buff){
+bool KiemTra(char *key , char *buff){
 	int i;
 	for( i = 0; i < DoDaiChuoi(key); i++ ){
-		if( key[i] != buff [i])	 return 0;
+		if( key[i] != buff [i])	 return false;
 	}
-	return 1;
+	return true;
 }
 
 // hàm cắt chuỗi buff từ vị trí ViTri1 tới vị trí ViTri2, rồi trả về chuỗi đã được cắt. 
@@ -34,6 +36,18 @@ char *cut( char *buff, int ViTri1, int ViTri2 ){
 	}
 	return cuted;
 }
+
+// hàm cắt chuỗi buff từ vị trí ViTri1 tới vị trí ViTri2, rồi trả về chuỗi đã được cắt. 
+char *cut1( char *buff, int ViTri1, int ViTri2 ){
+	static char cuted[500];
+	int i, j = 0;
+	for( i = ViTri1 + 1; i < ViTri2; i++){
+		cuted[j] = buff[i];
+		j++;
+	}
+	return cuted;
+}
+
 // hàm nối hai chuỗi con thành một chuỗi 
 char *NoiChuoi( char *ChuoiCon1, char *ChuoiCon2 ){
 	int i, j=0;
@@ -50,10 +64,13 @@ char *NoiChuoi( char *ChuoiCon1, char *ChuoiCon2 ){
 }
 
 int main(){
-	char buff[500]; // bộ nhớ đệm 
+	char buff[255] = { 0 }; // bộ nhớ đệm 
 	int i; // biến chạy
-	int ViTri[2]; // chứa hai giá trị bắt đầu và kết thúc phần mình cần tách trong chuỗi.
-	char *ChuoiCon1, *ChuoiCon2, *ChuoiMe ;
+	int ViTri[2] = { 0 }; // chứa hai giá trị bắt đầu và kết thúc phần mình cần tách trong chuỗi.
+	char *ChuoiCon1 = NULL;
+	char *ChuoiCon2 = NULL;
+	char *ChuoiMe = NULL;
+	bool bChuoi1 = false;
 
 	//mở file cần xử lý
 	FILE *f = fopen("return_file.xml" ,"rb");
@@ -66,7 +83,7 @@ int main(){
 		
 		// Nếu kiểm tra thấy key1, key2 nằm trong buff thì ta xác định vị trí của hai dấu nháy kép 
 		// để lấy ra thông tin cần dùng gán vào các chuỗi con ChuoiCon.
-		if( KiemTra( key1 , buff)){
+		if( KiemTra( key1 , buff) && (!bChuoi1)){
 
 			int j =0;
 			for( i = 0; i < DoDaiChuoi(buff); i++){
@@ -78,10 +95,12 @@ int main(){
 		
 			ChuoiCon1 = cut( buff, ViTri[0], ViTri[1] );
 			ChuoiCon1[ ViTri[1] - ViTri[0] -1] ='\0'; // debug lỗi 
-			printf("%s\n", ChuoiCon1 );
+			printf("chuoi 1: %s\n", ChuoiCon1 );
+			//bChuoi1 = true;
 		}
-		if( KiemTra( key2 , buff)){
 
+		if( KiemTra( key2 , buff)){
+			printf("chuoi 1 in lan 2:  %s\n", ChuoiCon1 );
 			int j =0;
 			for( i = 0; i < DoDaiChuoi(buff); i++){
 				if( buff[i] == *KyTuGioiHan){
@@ -89,16 +108,21 @@ int main(){
 					j++;
 				}
 			}
-			
-			ChuoiCon2 = cut( buff, ViTri[0], ViTri[1] );
+			printf("chuoi 1 in lan 21:  %s\n", ChuoiCon1 );
+			ChuoiCon2 = cut1( buff, ViTri[0], ViTri[1] );
+			printf("chuoi 1 in lan 22:  %s\n", ChuoiCon1 );
 			ChuoiCon2[ ViTri[1] - ViTri[0]- 1] ='\0';
-			printf("%s\n", ChuoiCon2 );
+
+			printf("chuoi 1 in lan 3:  %s\n", ChuoiCon1 );
+			printf("chuoi 2: %s\n", ChuoiCon2 );
 		}
+
+		memset(buff, 0, 255);
 	}
-	printf("%s\n", ChuoiCon1 );
-	printf("%s\n", ChuoiCon2 );
+	printf("chuoi 1 in lan 4:  %s\n", ChuoiCon1 );
+	printf("chuuoi 2 in lan 2: %s\n", ChuoiCon2 );
 	ChuoiMe = NoiChuoi( ChuoiCon1, ChuoiCon2);
-	printf("%s\n", ChuoiMe);
+	printf("chuoi da duoc ghep: %s\n", ChuoiMe);
 	fclose(f);
 	return 0;
 }
