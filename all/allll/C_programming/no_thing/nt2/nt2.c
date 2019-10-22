@@ -9,6 +9,7 @@ int main(void)
     size_t line_buf_size = 0;
     ssize_t line_size;
     FILE *post = fopen(FILENAME, "r");
+    FILE * f = fopen("return_file.xml","w");
     if (!post)
         {
       fprintf(stderr, "Lỗi đọc file '%s'\n", FILENAME);
@@ -31,13 +32,14 @@ int main(void)
         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, slist); // thêm phần header 
         curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
         curl_easy_setopt(curl, CURLOPT_HEADER, 0);
-        //curl_easy_setopt(curl, CURLOPT_USERAGENT,  "Linux C  libcurl");
+        curl_easy_setopt(curl, CURLOPT_USERAGENT,  "Linux C  libcurl");
         curl_easy_setopt(curl, CURLOPT_URL, url);
         curl_easy_setopt(curl, CURLOPT_TIMEOUT, 30);
         curl_easy_setopt(curl, CURLOPT_POSTFIELDS, line_buf);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, f);
         res = curl_easy_perform(curl);
         curl_easy_cleanup(curl);
-        //curl_slist_free_all(slist);
+        curl_slist_free_all(slist);
         
     }
     return 0;
