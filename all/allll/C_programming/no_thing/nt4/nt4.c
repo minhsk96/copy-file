@@ -8,7 +8,7 @@ int is_leaf(xmlNode * node)
   xmlNode * child = node->children;
   while(child)
   {
-    if(child->type == XML_ELEMENT_NODE) return 0; //? XML_ELEMENT_NODE là gì 
+    if(child->type == 1) return 0; 
  
     child = child->next;
   }
@@ -20,7 +20,7 @@ void print_xml(xmlNode * node, int indent_len)
 {
     while(node)
     {
-        if(node->type == XML_ELEMENT_NODE) 
+        if(node->type == 1) 
         {
           // nếu is_leaf(node) đúng thì in ra xmlNodeGetContent(node). không thì in ra xmlGetProp(node, "id")
           printf("%*c%s:%s\n", indent_len*2, '-', node->name, is_leaf(node)?xmlNodeGetContent(node):xmlGetProp(node, "id"));
@@ -34,7 +34,7 @@ int main(){
   xmlDoc *doc = NULL;
   xmlNode *root_element = NULL;
  
-  doc = xmlReadFile("test.xml", NULL, 0);                                                                                          
+  doc = xmlReadFile("return_file.xml", NULL, 0);                                                                                          
  
   if (doc == NULL) {
     printf("Could not parse the XML file");

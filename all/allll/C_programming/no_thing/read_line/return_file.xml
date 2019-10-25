@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<response protocol="3.0" server="prod">
+  <daystart elapsed_seconds="18637" elapsed_days="4677"/>
+  <app appid="{6E385309-85DB-454F-B20B-04DF53DB2018}" status="ok">
+    <updatecheck status="ok">
+      <urls>
+        <url codebase="http://cdn.bphone.bkav.com/media/build/BPHONE3_NOI_BO/beta/win/3320009719809/"/>
+      </urls>
+      <manifest version="3.5.0.1" created="2019-07-20 02:29:32.486634+00:00" modified="2019-09-20 08:29:52.582067+00:00">
+        <packages>
+          <package name="update-3418-3501-beta-signed.zip" required="true" size="54963062" hash="TI2CClLOozMSStI6BmRedDaQ2lE="/>
+        </packages>
+        <actions>
+          <action event="preinstall" successsaction="default" lang="vi" update_name="Bphone 3" type="release_note" update_message=""/>
+          <action event="preinstall" successsaction="default" lang="eng" update_name="Bphone 3" type="release_note" update_message=""/>
+          <action event="preinstall" successsaction="default" is_important="false" type="other_information" internal="no"/>
+        </actions>
+      </manifest>
+    </updatecheck>
+  </app>
+</response>

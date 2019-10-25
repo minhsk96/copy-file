@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<response protocol="3.0" server="prod">
+  <daystart elapsed_seconds="40328" elapsed_days="4680"/>
+  <app appid="{6E385309-85DB-454F-B20B-04DF53DB2018}" status="ok">
+    <updatecheck status="noupdate"/>
+  </app>
+</response>
